@@ -237,6 +237,12 @@
     const result = await response.json();
             console.log("result:",result);
 
+            if(result.data.token!=="undefined"){
+               // buka tab setelah token berhasil didapat
+      window.open(href, "_blank", "noopener,noreferrer");
+      return;
+            }
+
     if (result.success) {
       console.log("Token:", result.data.token);
 
