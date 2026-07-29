@@ -223,11 +223,29 @@
                 }),
                             },
             );
-            if (response.redirected) {
-              window.location.href = response.url;
-            }
-            // fetch berhasil tapi tidak redirect — fallback buka tab baru
-            window.open(href, "_blank", "noopener,noreferrer");
+            // Jika server me-redirect
+    if (response.redirected) {
+      window.location.href = response.url;
+      return;
+    }
+
+    // HTTP error (404, 500, dll)
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      console.log("Token:", result.data.token);
+
+      // buka tab setelah token berhasil didapat
+      window.open(href, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    // success == false
+    window.open(href, "_blank", "noopener,noreferrer");
             return;
           }
 
