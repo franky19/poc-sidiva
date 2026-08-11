@@ -185,14 +185,14 @@
     >
       <input type="hidden" name="token" id="token-axis" />
     </form>
-    <!-- <form
+    <form
       id="form-sf"
       method="POST"
       action="https://www.smartfren.com/activation/api/token-ro"
       style="display: none"
     >
       <input type="hidden" name="token" id="token-sf" />
-    </form> -->
+    </form>
   </body>
   <script>
     document.querySelectorAll('a[aria-label^="Registrasi"]').forEach((link) => {
@@ -212,13 +212,13 @@
 
           // Smartfren — fetch (tim mereka)
           if (provider.toLowerCase() === "smartfren") {
-            // if (!window.AUTH_TOKEN) {
+            if (!window.AUTH_TOKEN) {
               window.location.href = href;
               return;
-            // }
-            // document.getElementById("token-sf").value = window.AUTH_TOKEN;
-            // document.getElementById("form-sf").submit();
-            // return;
+            }
+            document.getElementById("token-sf").value = window.AUTH_TOKEN;
+            document.getElementById("form-sf").submit();
+            return;
           }
 
           // XL — form POST
